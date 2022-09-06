@@ -1,0 +1,132 @@
+.search-drop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  z-index: 10;
+  background-color: rgba(139, 139, 139, 0.4);
+}
+
+.search {
+  z-index: 25;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  background-color: rgb(251, 251, 251);
+  width: 100%;
+  display: grid;
+  place-content: center;
+
+  .search-content {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include Pads() {
+      width: 400px;
+    }
+
+    @include PadsPro() {
+      width: 700px;
+    }
+
+    @include Laptops() {
+      width: 700px;
+    }
+
+    @include HiDPI() {
+      width: 700px;
+    }
+
+    input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #cecece;
+      padding: 0.5rem 0rem;
+      outline: none;
+      background-color: transparent;
+      font-size: 1rem;
+      color: #282828;
+      font-weight: 400;
+
+      @include PhonePro() {
+        font-size: 1.2rem;
+      }
+
+      @include Pads() {
+        font-size: 1.4rem;
+      }
+
+      @include PadsPro() {
+        font-size: 1.4rem;
+      }
+
+      @include Laptops() {
+        font-size: 1.4rem;
+      }
+
+      @include HiDPI() {
+        font-size: 1.4rem;
+      }
+    }
+
+    input::placeholder {
+      font-size: 1rem;
+      color: #282828;
+
+      @include PhonePro() {
+        font-size: 1.2rem;
+      }
+
+      @include Pads() {
+        font-size: 1.4rem;
+      }
+
+      @include PadsPro() {
+        font-size: 1.4rem;
+      }
+
+      @include Laptops() {
+        font-size: 1.4rem;
+      }
+
+      @include HiDPI() {
+        font-size: 1.4rem;
+      }
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+    .search-i {
+      font-size: 1rem;
+      margin-left: -3rem;
+      border: #cecece;
+      cursor: pointer;
+
+      @include PhonePro() {
+        font-size: 1.2rem;
+      }
+
+      @include Pads() {
+        font-size: 1.4rem;
+      }
+
+      @include PadsPro() {
+        font-size: 1.4rem;
+      }
+
+      @include Laptops() {
+        font-size: 1.4rem;
+      }
+
+      @include HiDPI() {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}

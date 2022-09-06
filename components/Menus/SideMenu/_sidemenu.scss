@@ -1,0 +1,90 @@
+.close-button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 1.5rem;
+
+  button {
+    font-size: 1.2rem;
+    border: none;
+    background: transparent;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    transition: background 0.4s linear;
+  }
+
+  button:hover {
+    background: rgba(61, 61, 61, 0.1);
+  }
+}
+
+.side-dropback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120vh;
+  bottom: 0;
+  z-index: 10;
+  background-color: rgba(139, 139, 139, 0.4);
+
+  @include Laptops() {
+    display: none;
+  }
+
+  @include HiDPI() {
+    display: none;
+  }
+}
+
+.side-menu {
+  height: 120vh;
+  z-index: 25;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  overflow: hidden;
+  background-color: rgb(251, 251, 251);
+  // width: 40%;
+  // opacity: 0;
+  // box-shadow: rgba(61, 61, 61, 0.2);
+  width: 60vw;
+
+  @include Landscape() {
+    overflow: scroll;
+  }
+
+  @include Pads() {
+    overflow-y: scroll;
+  }
+}
+
+.side-menu-content {
+  border-bottom: 1px solid #cecece;
+  margin: 0 2rem;
+
+  a {
+    color: inherit;
+  }
+
+  li {
+    list-style: none;
+    padding: 0.5rem 0rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #282828;
+    cursor: pointer;
+
+    @include PhonePro() {
+      font-size: 1.1rem;
+      padding: 0.8rem 0;
+    }
+
+    @include Pads() {
+      font-size: 1.3rem;
+      padding: 1rem 0;
+    }
+  }
+}

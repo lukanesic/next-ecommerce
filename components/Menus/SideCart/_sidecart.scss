@@ -1,0 +1,97 @@
+.dropback {
+  height: 100vh;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background-color: rgba(139, 139, 139, 0.4);
+  display: none;
+
+  @include PadsPro() {
+    display: block;
+  }
+
+  @include Laptops {
+    display: block;
+  }
+
+  @include HiDPI {
+    display: block;
+  }
+}
+
+.uni-drop {
+  display: block;
+}
+
+.menu {
+  height: 100vh;
+  z-index: 25;
+  position: absolute;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+  background-color: rgb(251, 251, 251);
+  width: 400px;
+  // width: 40%;
+  // opacity: 0;
+  // box-shadow: rgba(61, 61, 61, 0.2);
+
+  .button {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1.5rem;
+
+    button {
+      font-size: 1.2rem;
+      border: none;
+      background: transparent;
+      font-weight: 400;
+      cursor: pointer;
+      padding: 0.4rem 0.8rem;
+      border-radius: 12px;
+      transition: background 0.4s linear;
+    }
+
+    button:hover {
+      background: rgba(61, 61, 61, 0.1);
+    }
+  }
+
+  .side-cart-content {
+    height: 80%;
+    width: fit-content;
+    display: grid;
+    place-content: center;
+    margin: 0 auto 2rem;
+
+    font-size: 1rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+
+    h2 {
+      font-size: 3rem;
+      text-align: center;
+      // cursor: not-allowed;
+    }
+
+    button {
+      width: 100%;
+      background: #282828;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 0.8rem 0;
+      margin: 0.2rem 0;
+      font-size: 1.2rem;
+      border: none;
+    }
+
+    .white {
+      color: #282828;
+      background: #fff;
+      border: 1px solid #282828;
+    }
+  }
+}

@@ -1,0 +1,87 @@
+.lg-nav {
+  display: none;
+  color: #000;
+
+  @include PadsPro() {
+    display: block;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  @include Laptops() {
+    display: block;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  @include HiDPI() {
+    display: block;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    h1 {
+      font-weight: 300;
+      text-transform: uppercase;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+    a {
+      color: inherit;
+    }
+  }
+
+  .lg-nav-li {
+    ul {
+      display: flex;
+
+      li {
+        list-style: none;
+        margin: 0 1rem;
+        font-size: 0.9rem;
+        cursor: not-allowed;
+
+        @include Laptops() {
+          font-size: 1.1rem;
+        }
+
+        @include HiDPI() {
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+
+  .lg-nav-i {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 140px;
+    font-size: 0.9rem;
+    cursor: pointer;
+
+    @include Laptops() {
+      font-size: 1.1rem;
+    }
+
+    @include HiDPI() {
+      font-size: 1.1rem;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}

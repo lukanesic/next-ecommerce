@@ -1,0 +1,95 @@
+.t-c-dropback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  z-index: 10;
+  background-color: rgba(139, 139, 139, 0.4);
+
+  @include Laptops() {
+    display: none;
+  }
+
+  @include HiDPI() {
+    display: none;
+  }
+}
+
+.top-c {
+  z-index: 25;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  background-color: rgb(251, 251, 251);
+  width: 100%;
+  display: grid;
+  place-content: center;
+
+  .top-c-content {
+    width: fit-content;
+
+    h3 {
+      font-size: 0.9rem;
+      font-weight: 300;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+
+      @include PhonePro() {
+        font-size: 1.2rem;
+      }
+
+      @include Landscape() {
+        font-size: 0.8rem;
+        margin-bottom: 0.6rem;
+      }
+
+      @include Pads() {
+        font-size: 1.5rem;
+      }
+
+      span {
+        font-size: 1.5rem;
+
+        @include PhonePro() {
+          font-size: 1.9rem;
+        }
+
+        @include Pads() {
+          font-size: 2.2rem;
+        }
+      }
+    }
+
+    button {
+      width: 100%;
+      background: #282828;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 0.8rem 0;
+      margin: 0.2rem 0;
+      font-size: 0.7rem;
+      border: none;
+
+      @include PhonePro() {
+        font-size: 1rem;
+      }
+
+      @include Landscape() {
+        font-size: 0.6rem;
+        padding: 0.7rem 0;
+      }
+
+      @include Pads() {
+        font-size: 1rem;
+      }
+    }
+
+    .white {
+      color: #282828;
+      background: #fff;
+      border: 1px solid #282828;
+    }
+  }
+}
