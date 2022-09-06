@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-
 import { GrSearch } from 'react-icons/gr'
 import Link from 'next/link'
+import { useDispatch } from 'react-redux'
+import { addKeyword } from '../../../redux/slices/searchSlice'
+import { useRouter } from 'next/router'
 
 const Search = ({ open, setOpen }) => {
   const [searchVal, setSearchVal] = useState('')
 
   console.log(searchVal)
+
+  const dispatch = useDispatch()
+  const router = useRouter()
+
+  const handleSearch = () => {
+    dispatch(addKeyword(searchVal))
+    router.replace('/search')
+  }
 
   useEffect(() => {
     if (open) {
@@ -49,11 +59,12 @@ const Search = ({ open, setOpen }) => {
                 type='text'
                 placeholder='Search for ..'
                 onChange={(e) => setSearchVal(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
               />
               {/* <Link href='/search-results'>
                 <GrSearch className='search-i' />
               </Link> */}
-              <GrSearch className='search-i' />
+              <GrSearch className='search-i' onClick={() => handleSearch()} />
             </div>
           </motion.div>
         </>
