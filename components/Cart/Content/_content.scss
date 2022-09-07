@@ -1,0 +1,135 @@
+.cart-content {
+  @include PadsPro() {
+    width: 60%;
+  }
+
+  @include Laptops() {
+    width: 60%;
+  }
+
+  @include HiDPI() {
+    width: 60%;
+  }
+
+  .cart-c-info {
+    padding: 1rem 0;
+
+    h4 {
+      padding: 0.5rem 0;
+      font-size: 1.2rem;
+    }
+
+    p {
+      padding: 0.2rem 0;
+    }
+  }
+
+  .cart-price-qty {
+    width: fit-content;
+
+    @include PadsPro() {
+      display: flex;
+    }
+
+    @include Laptops() {
+      display: flex;
+    }
+
+    @include HiDPI() {
+      display: flex;
+    }
+
+    .c-cont {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.2rem 0;
+
+      h5 {
+        font-size: 1.5rem;
+        font-weight: 300;
+        margin-right: 2rem;
+      }
+    }
+  }
+
+  .cart-c-delivery {
+    padding: 1rem 0;
+
+    @include PadsPro() {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      margin-left: -1rem;
+    }
+
+    @include Laptops() {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      margin-left: -1rem;
+    }
+
+    @include HiDPI() {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      margin-left: -1rem;
+    }
+
+    .delivery {
+      padding: 0.5rem 0;
+
+      h5 {
+        text-transform: uppercase;
+        font-weight: 800;
+        font-size: 1rem;
+      }
+
+      @include PadsPro() {
+        border-right: 1px solid #cecece;
+        padding: 0.5rem 1rem;
+      }
+
+      @include Laptops() {
+        border-right: 1px solid #cecece;
+        padding: 0.5rem 1rem;
+      }
+
+      @include HiDPI() {
+        border-right: 1px solid #cecece;
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    .b-r-none {
+      border-right: none;
+    }
+  }
+
+  .cart-remove {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+
+    @include PadsPro() {
+      position: absolute;
+      top: 1.5rem;
+      right: 1rem;
+    }
+
+    @include Laptops() {
+      position: absolute;
+      top: 1.5rem;
+      right: 1rem;
+    }
+
+    @include HiDPI() {
+      position: absolute;
+      top: 1.5rem;
+      right: 1rem;
+    }
+
+    h5 {
+      margin-left: 1rem;
+      cursor: pointer;
+    }
+  }
+}

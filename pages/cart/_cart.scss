@@ -1,0 +1,65 @@
+.cart-h {
+  margin: 3rem auto 0.5rem;
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-weight: 100;
+  cursor: pointer;
+  width: fit-content;
+  text-align: center;
+}
+
+.cart {
+  padding: 0 2rem 2rem;
+  border-bottom: 1px solid #282828;
+  max-width: 600px;
+  margin: 4rem auto 2rem;
+
+  @include PadsPro() {
+    max-width: unset;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  @include Laptops() {
+    max-width: unset;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  @include HiDPI() {
+    max-width: 1300px;
+    width: unset;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .img-placeholder {
+    height: 40vh;
+    background: #282828;
+    margin: 0 auto;
+    display: block;
+
+    @include PadsPro() {
+      width: 300px;
+      height: 300px;
+      margin-right: 3rem;
+    }
+
+    @include Laptops() {
+      width: 300px;
+      height: 300px;
+      margin-right: 3rem;
+    }
+
+    @include HiDPI() {
+      width: 300px;
+      height: 300px;
+      margin-right: 3rem;
+    }
+  }
+}

@@ -1,34 +1,50 @@
 import React from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import MainLayout from '../../../layout/MainLayout'
+import { motion } from 'framer-motion'
 
 const Product = () => {
   return (
     <MainLayout>
-      <div className='product-container'>
-        <div style={{ width: 300, height: 300, background: '#000' }} />
-        <div className='p-c-info'>
-          {/* <h2>{product.name}</h2> */}
-          <h2>Product Name</h2>
-          <div className='stars'>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-
-          {/* <h3>${product.price}</h3> */}
-          <h3>Product Price</h3>
-          {/* <p>{product.description1}</p> */}
-          <p>Product Description</p>
-          <a href='#'>Shop the entire collection</a>
-
-          {/* <button onClick={() => openAddCart(product)}>Add to cart</button> */}
-          <button>Add to cart</button>
-          <p>Product Description 2</p>
+      <motion.div
+        className='collection'
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <div className='collection-heading'>
+          {/* Dynamic */}
+          {/* <h1>{collectionName}</h1> */}
+          <h1>Product Name</h1>
+          <h4>Collection</h4>
         </div>
-      </div>
+
+        <div className='product-container'>
+          {/* Placeholder dok ne dobijem pravu sliku */}
+          <div
+            className='img-placeholder'
+            style={{
+              height: 400,
+              width: 400,
+              background: '#000',
+              margin: '0 auto',
+            }}
+          />
+          <div className='p-info'>
+            <p className='description d1'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ab
+              rem ut perferendis aut veniam!
+            </p>
+            <p className='description d2'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
+              maiores veritatis accusamus, molestiae asperiores sequi.
+            </p>
+            <h3>Price</h3>
+            <h3>$414</h3>
+            <button>Add To Cart</button>
+          </div>
+        </div>
+      </motion.div>
     </MainLayout>
   )
 }

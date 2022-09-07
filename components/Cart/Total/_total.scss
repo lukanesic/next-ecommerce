@@ -1,0 +1,45 @@
+.total {
+  max-width: 600px;
+  margin: 4rem auto;
+
+  .d-fl {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+  }
+
+  .sub {
+    border-top: 1px solid #cecece;
+  }
+
+  .tot {
+    border-top: 1px solid #cecece;
+  }
+
+  .left-h {
+    color: #5a5a5a;
+    font-weight: 200;
+  }
+
+  .right {
+    color: #282828;
+    font-weight: 500;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  button {
+    background: #282828;
+    color: #fff;
+    padding: 0.8rem 1rem;
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 1rem 0;
+    cursor: pointer;
+    border: none;
+  }
+}

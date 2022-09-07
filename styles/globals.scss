@@ -93,6 +93,10 @@
 @import './../components/Menus/SideMenu/sidemenu';
 @import './../components/Menus/TopCart/topcart';
 @import './../components/Box/box';
+@import './../components/Cart/Content/content';
+@import './../components/Cart/Delivery/delivery';
+@import './../components/Cart/Total/total';
 
 @import './../pages/[collection]/collection';
 @import './../pages/[collection]/[product]/product';
+@import './../pages/cart/cart';
