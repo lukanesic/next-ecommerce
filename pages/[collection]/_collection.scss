@@ -1,0 +1,44 @@
+.collection {
+  .collection-heading {
+    padding: 2rem 1rem 4rem;
+    text-align: center;
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 300;
+
+      @include PadsPro() {
+        font-size: 1.4rem;
+      }
+
+      @include Laptops() {
+        font-size: 1.4rem;
+      }
+
+      @include HiDPI() {
+        font-size: 1.4rem;
+      }
+    }
+
+    h1 {
+      margin: 0.5rem auto;
+      font-size: 3rem;
+      text-transform: uppercase;
+      font-weight: 100;
+      cursor: pointer;
+      width: fit-content;
+
+      @include PadsPro() {
+        font-size: 4rem;
+      }
+
+      @include Laptops() {
+        font-size: 4rem;
+      }
+
+      @include HiDPI() {
+        font-size: 4rem;
+      }
+    }
+  }
+}

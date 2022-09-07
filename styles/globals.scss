@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 
+@import './mediaquerries';
+
 * {
   margin: 0;
   padding: 0;
@@ -7,7 +9,81 @@
   box-sizing: border-box;
 }
 
-@import './mediaquerries';
+// HOME PAGE
+.home {
+  .home-bg {
+    background-color: #282828;
+    height: 90vh;
+    width: 100%;
+
+    @include Pads() {
+      height: 40vh;
+    }
+
+    @include PadsPro() {
+      height: 50vh;
+      margin-top: -10vh;
+      z-index: -1;
+    }
+
+    @include Laptops() {
+      height: 100vh;
+      margin-top: -10vh;
+      z-index: -1;
+    }
+
+    @include HiDPI() {
+      height: 100vh;
+      margin-top: -10vh;
+      z-index: -1;
+    }
+  }
+
+  .home-intro-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    width: fit-content;
+    margin: 0 auto;
+
+    h5 {
+      font-size: 1rem;
+      font-weight: 300;
+      text-transform: uppercase;
+
+      @include PadsPro() {
+        font-size: 1.5rem;
+      }
+
+      @include Laptops() {
+        font-size: 1.2rem;
+      }
+
+      @include HiDPI() {
+        font-size: 1.2rem;
+      }
+    }
+
+    h1 {
+      font-size: 3rem;
+      text-transform: uppercase;
+      font-weight: 100;
+      cursor: pointer;
+      color: #282828;
+
+      @include PadsPro() {
+        font-size: 5rem;
+      }
+
+      @include Laptops() {
+        font-size: 6rem;
+      }
+
+      @include HiDPI() {
+        font-size: 6rem;
+      }
+    }
+  }
+}
 
 @import './../components/Nav/Large/large';
 @import './../components/Nav/Small/small';
@@ -16,3 +92,7 @@
 @import './../components/Menus/SideCart/sidecart';
 @import './../components/Menus/SideMenu/sidemenu';
 @import './../components/Menus/TopCart/topcart';
+@import './../components/Box/box';
+
+@import './../pages/[collection]/collection';
+@import './../pages/[collection]/[product]/product';

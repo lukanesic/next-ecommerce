@@ -5,10 +5,11 @@ import { useSelector } from 'react-redux'
 const Search = () => {
   const { searchKeyword } = useSelector((state) => state.search)
 
+  // filtriranje proizvoda kroz ovu rec i prikazivanje
   console.log(searchKeyword)
   return (
     <MainLayout>
-      <h1>Hello</h1>
+      <h1>{searchKeyword && searchKeyword}</h1>
     </MainLayout>
   )
 }
