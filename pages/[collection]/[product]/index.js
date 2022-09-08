@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import MainLayout from '../../../layout/MainLayout'
 import { motion } from 'framer-motion'
 
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../../../redux/slices/cartSlice'
+
+import AddToCartSide from '../../../components/Menus/AddToCartSide'
+
 const Product = () => {
+  const dispatch = useDispatch()
+  const [showSideCart, setShowSideCart] = useState(false)
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product))
+    setShowSideCart(!showSideCart)
+  }
+
   return (
     <MainLayout>
       <motion.div
@@ -41,10 +54,31 @@ const Product = () => {
             </p>
             <h3>Price</h3>
             <h3>$414</h3>
-            <button>Add To Cart</button>
+            <button
+              onClick={() =>
+                handleAddToCart({
+                  name: 'Test',
+                  price: 'Test Price',
+                  description1: 'Test',
+                  description2: 'Test',
+                })
+              }
+            >
+              Add To Cart
+            </button>
           </div>
         </div>
       </motion.div>
+
+      <AddToCartSide
+        name={'Test'}
+        price={'Test'}
+        collection={'Test'}
+        show={showSideCart}
+        setShow={setShowSideCart}
+        image={'product.image'}
+        description1={'product.description1'}
+      />
     </MainLayout>
   )
 }

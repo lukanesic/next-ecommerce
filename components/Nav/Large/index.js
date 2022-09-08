@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 
 import { BsSearch } from 'react-icons/bs'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 
-// import { useSelector } from 'react-redux'
-
 const Large = ({ cls, open, setOpen, openSearch, setOpenSearch }) => {
-  //   const { user } = useSelector((state) => state.user)
+  // Fake state
+  const [isLogged, setIsLogged] = useState(false)
 
   return (
     <nav className={`lg-nav ${cls}`}>
@@ -45,7 +44,12 @@ const Large = ({ cls, open, setOpen, openSearch, setOpenSearch }) => {
         )}
       </div> */}
       <div className='lg-nav-i'>
-        <Link href='/account'>Account</Link>
+        {!isLogged ? (
+          <Link href='/login'>Login</Link>
+        ) : (
+          <Link href='/account'>Account</Link>
+        )}
+        {/* <Link href='/account'>Account</Link> */}
         <BsSearch onClick={() => setOpenSearch(!openSearch)} />
         <AiOutlineShoppingCart onClick={() => setOpen(!open)} />
       </div>

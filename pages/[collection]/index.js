@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import MainLayout from './../../layout/MainLayout'
 import { AnimatePresence, motion } from 'framer-motion'
 import Box from './../../components/Box'
 
+// const fetchCollection = async () => {
+//   const req = await fetch('/api/products')
+
+//   const res = await req.json()
+
+//   console.log(res)
+// }
+
 const Collection = () => {
+  // useEffect(() => {
+  //   fetchCollection()
+  // }, [])
+
   return (
     <MainLayout>
       <motion.div
@@ -56,6 +68,9 @@ const Collection = () => {
 export default Collection
 
 // MongoDB baza
+// export async function getStaticProps(context) {
+//   const { params } = context
+// }
 
 // export async function getStaticProps(context) {
 //     const { params } = context

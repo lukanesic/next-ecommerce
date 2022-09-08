@@ -1,0 +1,97 @@
+.form {
+  padding: 2rem;
+
+  @include Pads() {
+    width: 550px;
+    margin: 0 auto;
+  }
+
+  @include PadsPro() {
+    width: 550px;
+    margin: 0 auto;
+  }
+
+  @include Laptops() {
+    width: 550px;
+    margin: 0 auto;
+  }
+
+  @include HiDPI() {
+    width: 650px;
+    margin: 0 auto;
+  }
+
+  .formdiv {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+
+    label {
+      font-size: 2rem;
+      font-weight: 200;
+      color: #282828;
+    }
+
+    input {
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      transition: 0.4s ease all;
+      outline: none;
+      color: #282828;
+      border-radius: 5px;
+      border: 1px solid #cecece;
+    }
+
+    input:focus {
+      border: 1px solid #282828;
+    }
+
+    input::placeholder {
+      color: #cecece;
+    }
+
+    .inputLabelError {
+      border: 1px solid #d80000;
+    }
+
+    .inputLabelError:focus {
+      border: 1px solid #ff0000;
+    }
+  }
+
+  button {
+    padding: 0.6rem 5rem;
+    width: fit-content;
+    outline: none;
+    margin: 1rem auto;
+    font-size: 1rem;
+    font-weight: 500;
+    border: 1px solid #cecece;
+    background: white;
+    transition: 0.5s ease all;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #282828;
+    color: #fff;
+  }
+
+  .alternate {
+    padding: 1rem 0;
+
+    h4 {
+      font-size: 18;
+      font-weight: 300;
+    }
+
+    a {
+      text-decoration: none;
+      margin-top: 0.5rem;
+      display: block;
+      font-weight: bold;
+      color: #282828;
+      font-size: 18;
+    }
+  }
+}

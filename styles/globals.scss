@@ -89,13 +89,16 @@
 @import './../components/Nav/Small/small';
 
 @import './../components/Menus/Search/search';
+@import './../components/Menus/AddToCartSide/addtocartside';
 @import './../components/Menus/SideCart/sidecart';
 @import './../components/Menus/SideMenu/sidemenu';
-@import './../components/Menus/TopCart/topcart';
+
 @import './../components/Box/box';
 @import './../components/Cart/Content/content';
 @import './../components/Cart/Delivery/delivery';
 @import './../components/Cart/Total/total';
+@import './../components/Menus/TopCart/topcart';
+@import './../components/Form/form';
 
 @import './../pages/[collection]/collection';
 @import './../pages/[collection]/[product]/product';
