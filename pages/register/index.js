@@ -4,6 +4,7 @@ import Form from './../../components/Form'
 
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { getSession } from 'next-auth/react'
 
 const createUser = async (credentials) => {
   const response = await fetch('/api/auth/register', {
@@ -147,6 +148,23 @@ const Register = () => {
       </Form>
     </MainLayout>
   )
+}
+
+export const getServerSideProps = async (context) => {
+  const session = await getSession({ req: context.req })
+
+  if (session) {
+    return {
+      redirect: {
+        destination: '/profile',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: { session },
+  }
 }
 
 export default Register

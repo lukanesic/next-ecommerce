@@ -83,10 +83,12 @@
 
         @include Laptops() {
           font-size: 1.6rem;
+          font-weight: 300;
         }
 
         @include HiDPI() {
           font-size: 1.6rem;
+          font-weight: 300;
         }
       }
 

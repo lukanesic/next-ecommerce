@@ -4,7 +4,15 @@ import MainLayout from '../layout/MainLayout'
 
 import Box from './../components/Box'
 
+const getData = async () => {
+  // const request = await fetch('http://localhost:3000/api/products/fetchData')
+  const request = await fetch('/api/products/fetchData')
+  const response = await request.json()
+  console.log(response)
+}
+
 export default function Home() {
+  // console.log(props.data)
   return (
     <div>
       <Head>
@@ -43,6 +51,26 @@ export default function Home() {
           </div>
         </div>
       </MainLayout>
+      <button onClick={() => getData()}>Call</button>
     </div>
   )
 }
+
+// export const getStaticProps = async () => {
+//   // ovo ce da ide u helpers, ovde samo isprobavam
+
+//   const getThreeAlaro = async () => {
+//     // Problem kao i pre. Resi to.
+//     const request = await fetch('http://localhost:3000/api/products/fetchData')
+//     const response = await request.json()
+//     return response
+//   }
+
+//   const data = await getThreeAlaro()
+
+//   return {
+//     props: {
+//       data: data,
+//     },
+//   }
+// }

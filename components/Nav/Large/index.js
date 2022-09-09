@@ -4,9 +4,17 @@ import Link from 'next/link'
 import { BsSearch } from 'react-icons/bs'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 
+import { useSession, signOut } from 'next-auth/react'
+import { useRouter } from 'next/router'
+
 const Large = ({ cls, open, setOpen, openSearch, setOpenSearch }) => {
-  // Fake state
-  const [isLogged, setIsLogged] = useState(false)
+  const { data: session, status } = useSession()
+  const router = useRouter()
+
+  const handleSignOut = async () => {
+    router.replace('/')
+    await signOut({ redirect: false })
+  }
 
   return (
     <nav className={`lg-nav ${cls}`}>
@@ -27,29 +35,16 @@ const Large = ({ cls, open, setOpen, openSearch, setOpenSearch }) => {
         </ul>
       </div>
 
-      {/* <div className='lg-nav-i'>
-        {Object.keys(user).length !== 0 && user.isAdmin && (
-          <Link to='/admin'>Admin</Link>
-        )}
-        {Object.keys(user).length !== 0 && !user.isAdmin && (
-          <Link to='/account'>Account</Link>
-        )}
-        {Object.keys(user).length === 0 && <Link to='/login'>Sign In</Link>}
-
-        {!user.isAdmin && (
-          <>
-            <BsSearch onClick={() => setOpenSearch(!openSearch)} />
-            <AiOutlineShoppingCart onClick={() => setOpen(!open)} />
-          </>
-        )}
-      </div> */}
       <div className='lg-nav-i'>
-        {!isLogged ? (
-          <Link href='/login'>Login</Link>
-        ) : (
-          <Link href='/account'>Account</Link>
+        {session && <Link href='/account'>Account</Link>}
+        {session && (
+          <a style={{ cursor: 'pointer' }} onClick={handleSignOut}>
+            Logout
+          </a>
         )}
-        {/* <Link href='/account'>Account</Link> */}
+
+        {!session && <Link href='/login'>Login</Link>}
+
         <BsSearch onClick={() => setOpenSearch(!openSearch)} />
         <AiOutlineShoppingCart onClick={() => setOpen(!open)} />
       </div>

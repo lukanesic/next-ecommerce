@@ -3,20 +3,22 @@ import Content from '../../components/Cart/Content'
 import Total from '../../components/Cart/Total'
 import MainLayout from './../../layout/MainLayout'
 
-const arr = [0, 1, 2]
+import { useDispatch, useSelector } from 'react-redux'
 
 const Cart = () => {
+  const { cartTotalAmonut, cart } = useSelector((state) => state.cart)
+
   return (
     <MainLayout>
       <h1 className='cart-h'>Your Cart</h1>
-      {arr.map((item, index) => (
-        <div className='cart' key={index}>
+      {cart.map((item, index) => (
+        <div className='cart' key={item.id}>
           <div className='img-placeholder' />
-          <Content />
+          <Content item={item} cartTotalAmonut={cartTotalAmonut} />
         </div>
       ))}
 
-      <Total />
+      <Total total={cartTotalAmonut} />
     </MainLayout>
   )
 }
