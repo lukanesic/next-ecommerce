@@ -3,19 +3,18 @@ import MainLayout from './../../layout/MainLayout'
 import { AnimatePresence, motion } from 'framer-motion'
 import Box from './../../components/Box'
 
-// const fetchCollection = async () => {
-//   const req = await fetch('/api/products')
+const params = 'alaro'
 
-//   const res = await req.json()
+const testCall = async () => {
+  const request = await fetch(`/api/products/collection?params=${params}`)
+  const response = await request.json()
 
-//   console.log(res)
-// }
+  const data = response.map((product) => product.collection)
+  console.log(data)
+}
 
-const Collection = () => {
-  // useEffect(() => {
-  //   fetchCollection()
-  // }, [])
-
+const Collection = ({ data }) => {
+  console.log(data)
   return (
     <MainLayout>
       <motion.div
@@ -59,67 +58,53 @@ const Collection = () => {
             name={'Alaro Ottoman'}
             price={795}
           />
+
+          {/* <button onClick={() => testCall()}>Call</button> */}
         </div>
       </motion.div>
     </MainLayout>
   )
 }
 
+export const getStaticProps = async (context) => {
+  const getCollection = async () => {
+    const { params } = context
+
+    const request = await fetch(
+      `http://localhost:3000/api/products/collection?params=${params.collection}`,
+      params
+    )
+    const response = await request.json()
+    return response
+  }
+
+  const data = await getCollection()
+
+  return {
+    props: {
+      data,
+    },
+  }
+}
+
+export async function getStaticPaths() {
+  const getCollectionPath = async () => {
+    const request = await fetch(`http://localhost:3000/api/products/collection`)
+    const response = await request.json()
+    return response
+  }
+
+  const data = await getCollectionPath()
+  const paths = await data.map((product) => {
+    return {
+      params: { collection: product.collection },
+    }
+  })
+
+  return {
+    paths: paths,
+    fallback: false,
+  }
+}
+
 export default Collection
-
-// MongoDB baza
-// export async function getStaticProps(context) {
-//   const { params } = context
-// }
-
-// export async function getStaticProps(context) {
-//     const { params } = context
-
-//     let data = []
-
-//     try {
-//       const q = query(
-//         collection(db, 'products'),
-//         where('collection', '==', params.collection)
-//       )
-//       const querySnapshot = await getDocs(q)
-//       querySnapshot.forEach((doc) => {
-//         return data.push({ ...doc.data(), id: doc.id })
-//       })
-//     } catch (error) {
-//       console.log(error)
-//     }
-
-//     return {
-//       props: {
-//         data: { data },
-//         params: params.collection,
-//       },
-//     }
-//   }
-
-//   export async function getStaticPaths() {
-//     let products
-
-//     try {
-//       const productRef = collection(db, 'products')
-//       const data = await getDocs(productRef)
-//       products = data.docs.map((product) => ({
-//         ...product.data(),
-//         id: product.id,
-//       }))
-//     } catch (error) {
-//       console.log(error)
-//     }
-
-//     const paths = products.map((product) => {
-//       return {
-//         params: { collection: product.collection },
-//       }
-//     })
-
-//     return {
-//       paths: paths,
-//       fallback: false,
-//     }
-//   }

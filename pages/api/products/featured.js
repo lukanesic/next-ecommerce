@@ -4,9 +4,13 @@ const handler = async (req, res) => {
   if (req.method === 'GET') {
     const client = await connectDatabase()
     const db = client.db('ecomm')
-    const data = db.collection('products').find({ collection: 'alaro' })
+    const data = await db
+      .collection('products')
+      .find({ featured: true })
+      .toArray()
 
     res.json(data)
+    client.close()
   }
 }
 

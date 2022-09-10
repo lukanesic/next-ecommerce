@@ -4,15 +4,11 @@ import MainLayout from '../layout/MainLayout'
 
 import Box from './../components/Box'
 
-const getData = async () => {
-  // const request = await fetch('http://localhost:3000/api/products/fetchData')
-  const request = await fetch('/api/products/fetchData')
-  const response = await request.json()
-  console.log(response)
-}
+export default function Home({ data }) {
+  const alaroCollection = data.filter(
+    (item, index) => item.collection === 'alaro'
+  )
 
-export default function Home() {
-  // console.log(props.data)
   return (
     <div>
       <Head>
@@ -32,45 +28,34 @@ export default function Home() {
           </div>
 
           <div className='home-box-container'>
-            <Box
-              link={'alaro/alaro-sofa'}
-              name={'Alaro Sofa'}
-              price={2445}
-              // image={alarosofa}
-            />
-            <Box
-              link={'alaro/alaro-lounge-chair'}
-              price={1695}
-              name={'Alaro Chair'}
-            />
-            <Box
-              link={'alaro/alaro-ottoman'}
-              name={'Alaro Ottoman'}
-              price={795}
-            />
+            {alaroCollection.map((item) => (
+              <Box
+                key={item._id}
+                link={`${item.collection}/${item.href}`}
+                price={item.price}
+                name={item.name}
+                image={item.image}
+              />
+            ))}
           </div>
         </div>
       </MainLayout>
-      <button onClick={() => getData()}>Call</button>
     </div>
   )
 }
 
-// export const getStaticProps = async () => {
-//   // ovo ce da ide u helpers, ovde samo isprobavam
+export const getStaticProps = async () => {
+  const getFeatured = async () => {
+    const request = await fetch('http://localhost:3000/api/products/featured')
+    const response = await request.json()
+    return response
+  }
 
-//   const getThreeAlaro = async () => {
-//     // Problem kao i pre. Resi to.
-//     const request = await fetch('http://localhost:3000/api/products/fetchData')
-//     const response = await request.json()
-//     return response
-//   }
+  const data = await getFeatured()
 
-//   const data = await getThreeAlaro()
-
-//   return {
-//     props: {
-//       data: data,
-//     },
-//   }
-// }
+  return {
+    props: {
+      data: data,
+    },
+  }
+}
