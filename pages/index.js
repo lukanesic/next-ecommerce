@@ -9,6 +9,10 @@ export default function Home({ data }) {
     (item, index) => item.collection === 'alaro'
   )
 
+  const rhodesCollection = data.filter(
+    (item, index) => item.collection === 'rhodes'
+  )
+
   return (
     <div>
       <Head>
@@ -35,6 +39,28 @@ export default function Home({ data }) {
                 price={item.price}
                 name={item.name}
                 image={item.image}
+                id={item._id}
+              />
+            ))}
+          </div>
+
+          <div className='home-intro-section'>
+            <h5>Introducing</h5>
+            <Link href='/rhodes'>
+              <h1>Rhodes</h1>
+            </Link>
+            <h5>The 2022 Collection</h5>
+          </div>
+
+          <div className='home-box-container'>
+            {rhodesCollection.map((item) => (
+              <Box
+                key={item._id}
+                link={`${item.collection}/${item.href}`}
+                price={item.price}
+                name={item.name}
+                image={item.image}
+                id={item._id}
               />
             ))}
           </div>

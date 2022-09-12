@@ -2,10 +2,21 @@ import React from 'react'
 import Link from 'next/link'
 
 const Total = ({ total }) => {
-  // const { cartTotalAmonut } = useSelector((state) => state.cart)
-
   const getNumberWithCommas = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+  }
+
+  console.log(total)
+
+  if (!total || total === 0) {
+    return (
+      <div className='total'>
+        <h2 style={{ textAlign: 'center' }}>Your Cart is empty</h2>
+        <Link href='/'>
+          <button>Return to homepage</button>
+        </Link>
+      </div>
+    )
   }
 
   return (

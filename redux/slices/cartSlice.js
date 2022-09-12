@@ -1,33 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const sampleData = [
-  {
-    id: '1',
-    name: 'Test 1',
-    price: 300,
-    description: 'Desc 1',
-    qty: 1,
-  },
-  { id: '2', name: 'Test 2', price: 200, description: 'Desc 2', qty: 1 },
-  { id: '3', name: 'Test 3', price: 200, description: 'Desc 3', qty: 1 },
-]
-
 const initialState = {
-  // cart:
-  //   typeof window !== 'undefined' && localStorage.getItem('cart')
-  //     ? JSON.parse(localStorage.getItem('cart'))
-  //     : [],
-  cart: [
-    {
-      id: '1',
-      name: 'Test 1',
-      price: 300,
-      description: 'Desc 1',
-      qty: 1,
-    },
-    { id: '2', name: 'Test 2', price: 200, description: 'Desc 2', qty: 1 },
-    { id: '3', name: 'Test 3', price: 200, description: 'Desc 3', qty: 1 },
-  ],
+  cart:
+    typeof window !== 'undefined' && localStorage.getItem('cart')
+      ? JSON.parse(localStorage.getItem('cart'))
+      : [],
   cartTotalAmonut: 0,
   cartTotalQuantity: 0,
 }
