@@ -7,13 +7,15 @@ import { signIn, getSession } from 'next-auth/react'
 
 import Link from 'next/link'
 
-const Login = () => {
+const Login = ({ path }) => {
   const [error, setError] = useState()
 
   const enteredEmail = useRef()
   const enteredPassword = useRef()
 
   const router = useRouter()
+
+  const prevPath = path.split('/').pop() === 'checkout'
 
   const resetForm = () => {
     enteredEmail.current.value = ''
@@ -46,7 +48,7 @@ const Login = () => {
       }
 
       resetForm()
-      router.replace('/')
+      router.replace(`${prevPath ? 'checkout' : '/'}`)
 
       console.log(result)
     } catch (error) {
@@ -105,6 +107,7 @@ const Login = () => {
 
 export const getServerSideProps = async (context) => {
   const session = await getSession({ req: context.req })
+  const path = context.req.headers.referer
 
   if (session) {
     return {
@@ -116,7 +119,7 @@ export const getServerSideProps = async (context) => {
   }
 
   return {
-    props: { session },
+    props: { session, path },
   }
 }
 
