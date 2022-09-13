@@ -3,6 +3,7 @@ import MainLayout from './../../layout/MainLayout'
 import { getSession, useSession } from 'next-auth/react'
 import Form from './../../components/Form'
 import { useRouter } from 'next/router'
+import OrderHistory from '../../components/Account/OrderHistory'
 
 const changePassword = async (passwordData) => {
   const response = await fetch('/api/user/changePass', {
@@ -21,6 +22,7 @@ const changePassword = async (passwordData) => {
 const Account = () => {
   const [error, setError] = useState()
   const [success, setSuccess] = useState()
+  const [accountTab, setAccountTab] = useState(0)
 
   const router = useRouter()
   const currPass = useRef()
@@ -71,40 +73,59 @@ const Account = () => {
         <h4>{session && session.user.email}</h4>
       </div>
 
-      <Form onSubmit={handleChangePassword}>
-        <div className='formdiv'>
-          <label htmlFor='email'> Current Password</label>
-          <input
-            type='password'
-            name='password'
-            id='password'
-            placeholder='Password'
-            ref={currPass}
-            required
-            className={!error ? 'inputLabel' : 'inputLabelError'}
-          />
+      <div className='account-tab'>
+        <h3
+          onClick={() => setAccountTab(0)}
+          className={accountTab === 0 && 'active-tab'}
+        >
+          Change Password
+        </h3>
+        <h3
+          onClick={() => setAccountTab(1)}
+          className={accountTab === 1 && 'active-tab'}
+        >
+          Order History
+        </h3>
+      </div>
 
-          {error && <li className='liErr'>{error}</li>}
-        </div>
+      {accountTab === 0 && (
+        <Form onSubmit={handleChangePassword}>
+          <div className='formdiv'>
+            <label htmlFor='email'> Current Password</label>
+            <input
+              type='password'
+              name='password'
+              id='password'
+              placeholder='Password'
+              ref={currPass}
+              required
+              className={!error ? 'inputLabel' : 'inputLabelError'}
+            />
 
-        <div className='formdiv'>
-          <label htmlFor='email'> New Password</label>
-          <input
-            type='password'
-            name='password'
-            id='newPassword'
-            placeholder='Password'
-            ref={newPass}
-            required
-          />
-        </div>
+            {error && <li className='liErr'>{error}</li>}
+          </div>
 
-        {!error ? (
-          <button>Change</button>
-        ) : (
-          <button onClick={(e) => resetForm(e)}>Try Again</button>
-        )}
-      </Form>
+          <div className='formdiv'>
+            <label htmlFor='email'> New Password</label>
+            <input
+              type='password'
+              name='password'
+              id='newPassword'
+              placeholder='Password'
+              ref={newPass}
+              required
+            />
+          </div>
+
+          {!error ? (
+            <button>Change</button>
+          ) : (
+            <button onClick={(e) => resetForm(e)}>Try Again</button>
+          )}
+        </Form>
+      )}
+
+      {accountTab === 1 && <OrderHistory />}
     </MainLayout>
   )
 }

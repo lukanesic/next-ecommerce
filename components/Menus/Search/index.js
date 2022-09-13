@@ -9,14 +9,13 @@ import { useRouter } from 'next/router'
 const Search = ({ open, setOpen }) => {
   const [searchVal, setSearchVal] = useState('')
 
-  console.log(searchVal)
-
   const dispatch = useDispatch()
   const router = useRouter()
 
   const handleSearch = () => {
     dispatch(addKeyword(searchVal))
     router.replace('/search')
+    setOpen(!open)
   }
 
   useEffect(() => {

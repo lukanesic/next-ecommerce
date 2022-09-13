@@ -100,8 +100,10 @@
 @import './../components/Menus/TopCart/topcart';
 @import './../components/Form/form';
 @import './../components/Checkout/Summary/summary';
+@import './../components/Account/OrderHistory/orderhistory';
 
 @import './../pages/[collection]/collection';
 @import './../pages/[collection]/[product]/product';
 @import './../pages/cart/cart';
 @import './../pages/account/account';
+@import './../pages/search/search';

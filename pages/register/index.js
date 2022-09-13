@@ -32,6 +32,7 @@ const Register = () => {
   const enteredEmail = useRef()
   const enteredPassword = useRef()
   const confirmPassword = useRef()
+  const enteredAddress = useRef()
 
   const router = useRouter()
 
@@ -40,6 +41,7 @@ const Register = () => {
     enteredEmail.current.value = ''
     enteredPassword.current.value = ''
     confirmPassword.current.value = ''
+    enteredAddress.current.value = ''
 
     setError()
   }
@@ -61,6 +63,7 @@ const Register = () => {
       name: enteredName.current.value,
       email: enteredEmail.current.value,
       password: enteredPassword.current.value,
+      address: enteredAddress.current.value,
     }
 
     try {
@@ -105,6 +108,19 @@ const Register = () => {
             placeholder='Email'
             required
             ref={enteredEmail}
+            className='inputLabel'
+          />
+        </div>
+
+        <div className='formdiv'>
+          <label htmlFor='email'>Address</label>
+          <input
+            type='text'
+            name='address'
+            id='address'
+            placeholder='Address'
+            required
+            ref={enteredAddress}
             className='inputLabel'
           />
         </div>

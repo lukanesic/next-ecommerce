@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  searchKeyword: '',
+  searchKeyword:
+    typeof window !== 'undefined' && localStorage.getItem('searchKeyword')
+      ? JSON.parse(localStorage.getItem('searchKeyword'))
+      : '',
 }
 
 export const searchSlice = createSlice({
@@ -10,6 +13,7 @@ export const searchSlice = createSlice({
   reducers: {
     addKeyword: (state, { payload }) => {
       state.searchKeyword = payload
+      localStorage.setItem('searchKeyword', JSON.stringify(state.searchKeyword))
     },
   },
 })
