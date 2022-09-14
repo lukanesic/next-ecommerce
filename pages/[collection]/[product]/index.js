@@ -8,7 +8,7 @@ import { addToCart } from '../../../redux/slices/cartSlice'
 
 import AddToCartSide from '../../../components/Menus/AddToCartSide'
 
-const Product = () => {
+const Product = ({ data, path }) => {
   const dispatch = useDispatch()
   const [showSideCart, setShowSideCart] = useState(false)
 
@@ -16,6 +16,9 @@ const Product = () => {
     dispatch(addToCart(product))
     setShowSideCart(!showSideCart)
   }
+
+  console.log(data)
+  console.log(path)
 
   return (
     <MainLayout>
@@ -85,54 +88,42 @@ const Product = () => {
 
 export default Product
 
-// BAZA
-// export async function getStaticProps(context) {
-//     const { params } = context
+export async function getStaticPaths() {
+  const getCollectionPath = async () => {
+    const request = await fetch(`http://localhost:3000/api/products/all`)
+    const response = await request.json()
+    return response
+  }
 
-//     let data
+  const data = await getCollectionPath()
+  const paths = await data.map((product) => {
+    return {
+      params: { collection: product.collection, product: product.href },
+    }
+  })
+  return {
+    paths: paths,
+    fallback: false,
+  }
+}
 
-//     try {
-//       const q = query(
-//         collection(db, 'products'),
-//         where('link', '==', params.product)
-//       )
-//       const querySnapshot = await getDocs(q)
-//       querySnapshot.forEach((doc) => {
-//         return (data = { ...doc.data(), id: doc.id })
-//       })
-//     } catch (error) {
-//       console.log(error)
-//     }
+export const getStaticProps = async (context) => {
+  const { params } = context
+  const getCollection = async () => {
+    const request = await fetch(
+      `http://localhost:3000/api/products/product?params=${params.product}`,
+      params
+    )
+    const response = await request.json()
+    return response
+  }
 
-//     return {
-//       props: {
-//         product: data,
-//       },
-//     }
-//   }
+  const data = await getCollection()
 
-//   export async function getStaticPaths() {
-//     let products
-
-//     try {
-//       const productRef = collection(db, 'products')
-//       const data = await getDocs(productRef)
-//       products = data.docs.map((product) => ({
-//         ...product.data(),
-//         id: product.id,
-//       }))
-//     } catch (error) {
-//       console.log(error)
-//     }
-
-//     const paths = products.map((product) => {
-//       return {
-//         params: { collection: product.collection, product: product.link },
-//       }
-//     })
-
-//     return {
-//       paths: paths,
-//       fallback: false,
-//     }
-//   }
+  return {
+    props: {
+      data,
+      path: params.product,
+    },
+  }
+}

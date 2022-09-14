@@ -18,16 +18,17 @@ const Box = ({ link, name, price, image, id, placeholder }) => {
 
   return (
     <motion.div className='home-box'>
-      {/* <Link href={link}>
-        <img src={image} alt={name} height={300} width={300} />
-      </Link> */}
-      {/* Samo dok ne resim getStaticPaths, odavde ide dodavanje u korpu */}
-      <div onClick={() => dispatch(addToCart(item))}>
-        {image && <img src={image} alt={name} height={300} width={300} />}
-        {placeholder && (
-          <div style={{ height: 300, width: 300, background: '#f0f0f0' }} />
-        )}
-      </div>
+      {link && (
+        <Link href={link}>
+          {image && <img src={image} alt={name} height={300} width={300} />}
+        </Link>
+      )}
+
+      {/* Resi placeholdere za responsive, jer ne prati loading state po dimenzijama slike */}
+      {placeholder && (
+        <div style={{ height: 300, width: 300, background: '#f0f0f0' }} />
+      )}
+
       <div className='home-box-info'>
         {''}
         <h3 className={placeholder ? 'plc-hld' : ''}>
