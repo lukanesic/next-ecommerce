@@ -36,7 +36,12 @@ const Large = ({ cls, open, setOpen, openSearch, setOpenSearch }) => {
       </div>
 
       <div className='lg-nav-i'>
-        {session && <Link href='/account'>Account</Link>}
+        {session &&
+          (session.user.role === 'admin' ? (
+            <Link href='/admin'>Admin</Link>
+          ) : (
+            <Link href='/account'>Account</Link>
+          ))}
         {session && (
           <a style={{ cursor: 'pointer' }} onClick={handleSignOut}>
             Logout

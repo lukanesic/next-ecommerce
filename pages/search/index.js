@@ -60,7 +60,7 @@ const Search = () => {
             key={product._id}
             name={product.name}
             price={product.price}
-            link={product.href}
+            link={`${product.collection}/${product.href}`}
             image={product.image}
             id={product._id}
           />

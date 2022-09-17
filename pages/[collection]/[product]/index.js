@@ -3,6 +3,8 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import MainLayout from '../../../layout/MainLayout'
 import { motion } from 'framer-motion'
 
+import Image from 'next/image'
+
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../../redux/slices/cartSlice'
 
@@ -17,8 +19,7 @@ const Product = ({ data, path }) => {
     setShowSideCart(!showSideCart)
   }
 
-  console.log(data)
-  console.log(path)
+  const product = data[0]
 
   return (
     <MainLayout>
@@ -31,10 +32,9 @@ const Product = ({ data, path }) => {
         <div className='collection-heading'>
           {/* Dynamic */}
           {/* <h1>{collectionName}</h1> */}
-          <h1>Product Name</h1>
-          <h4>Collection</h4>
+          <h1>{product.name}</h1>
+          <h4>{product.collection.toUpperCase()}</h4>
         </div>
-
         <div className='product-container'>
           {/* Placeholder dok ne dobijem pravu sliku */}
           <div
@@ -42,28 +42,31 @@ const Product = ({ data, path }) => {
             style={{
               height: 400,
               width: 400,
-              background: '#000',
               margin: '0 auto',
+              position: 'relative',
             }}
-          />
+          >
+            <Image
+              src={product.image}
+              alt={product.name}
+              layout='fill'
+              objectFit='center'
+            />
+          </div>
           <div className='p-info'>
-            <p className='description d1'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos ab
-              rem ut perferendis aut veniam!
-            </p>
-            <p className='description d2'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
-              maiores veritatis accusamus, molestiae asperiores sequi.
-            </p>
+            <p className='description d1'>{product.about}</p>
+            <p className='description d2'>{product.description}</p>
             <h3>Price</h3>
-            <h3>$414</h3>
+            <h3>${product.price}</h3>
             <button
               onClick={() =>
                 handleAddToCart({
-                  name: 'Test',
-                  price: 'Test Price',
-                  description1: 'Test',
-                  description2: 'Test',
+                  name: product.name,
+                  price: product.price,
+                  description1: product.about,
+                  description2: product.description,
+                  id: product._id,
+                  image: product.image,
                 })
               }
             >
@@ -74,13 +77,13 @@ const Product = ({ data, path }) => {
       </motion.div>
 
       <AddToCartSide
-        name={'Test'}
-        price={'Test'}
-        collection={'Test'}
+        name={product.name}
+        price={product.price}
+        collection={product.collection}
         show={showSideCart}
         setShow={setShowSideCart}
-        image={'product.image'}
-        description1={'product.description1'}
+        image={product.image}
+        description1={product.about}
       />
     </MainLayout>
   )

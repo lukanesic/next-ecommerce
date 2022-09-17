@@ -7,6 +7,21 @@ export default NextAuth({
   session: {
     jwt: true,
   },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.address = user.address
+        token.role = user.role
+      }
+      return token
+    },
+    async session({ session, token }) {
+      session.user.address = token.address
+      session.user.role = token.role
+
+      return session
+    },
+  },
   providers: [
     CredentialsProvider({
       async authorize(credentials, req) {
@@ -35,6 +50,7 @@ export default NextAuth({
           name: user.name,
           email: user.email,
           role: user.role,
+          address: user.address,
         }
       },
     }),

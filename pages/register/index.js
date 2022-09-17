@@ -64,6 +64,7 @@ const Register = () => {
       email: enteredEmail.current.value,
       password: enteredPassword.current.value,
       address: enteredAddress.current.value,
+      role: 'customer',
     }
 
     try {

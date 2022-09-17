@@ -1,11 +1,8 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 
-const Summary = ({ onSubmit }) => {
-  const { cart, cartTotalAmonut, cartTotalQuantity } = useSelector(
-    (state) => state.cart
-  )
+import { getNumberWithCommas } from '../../../lib/calc'
 
+const Summary = ({ onSubmit, cart, cartTotalAmonut, cartTotalQuantity }) => {
   return (
     <div className='summary'>
       <h1 className='cart-h'>Summary</h1>
@@ -18,12 +15,12 @@ const Summary = ({ onSubmit }) => {
       ))}
       <div className='summary-sum'>
         <h2>{`Total items in cart - ${cartTotalQuantity}`}</h2>
-        <h2>{`Total to pay - $ ${cartTotalAmonut}`}</h2>
+        <h2>{`Total to pay - $ ${getNumberWithCommas(cartTotalAmonut)}`}</h2>
       </div>
 
-      <button type='submit' onSubmit={onSubmit}>
-        Proceed to payment
-      </button>
+      {/* Za sad je Order, ka napravim payment sistem, onda ide kroz to */}
+      {/* <button type='submit'>Proceed to payment</button> */}
+      <button type='submit'>Make your order</button>
     </div>
   )
 }

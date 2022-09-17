@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const AddToCartSide = ({
   show,
@@ -50,10 +51,11 @@ const AddToCartSide = ({
             </motion.div>
             <div className='add-cart-content'>
               <div className='add-cart-product-info'>
-                {/* <img src={image} alt={name} /> */}
+                <Image src={image} alt={name} width={250} height={250} />
 
                 <div className='add-cart-p-i-c'>
                   <h2>{name}</h2>
+                  <h2>${price}</h2>
                   <h3>Collection : {collection}</h3>
                 </div>
               </div>

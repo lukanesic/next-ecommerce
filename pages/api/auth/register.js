@@ -4,7 +4,7 @@ import { connectDatabase } from './../../../lib/db'
 const handler = async (req, res) => {
   if (req.method === 'POST') {
     const { credentials } = req.body
-    const { name, email, password } = credentials
+    const { name, email, password, address, role } = credentials
 
     // Validacija koja ne mora striktno da bude na serveru
     // ona je ista i na clientu, ali eto ovde je on resio da je pise. Ja cu to na clientu
@@ -26,6 +26,8 @@ const handler = async (req, res) => {
       name: name,
       email: email,
       password: hashPass,
+      role: role,
+      address: address,
     })
 
     res.status(201).json({ message: 'User is created.' })

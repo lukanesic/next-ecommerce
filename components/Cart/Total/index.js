@@ -1,12 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
+import { getNumberWithCommas } from './../../../lib/calc'
 
 const Total = ({ total }) => {
-  const getNumberWithCommas = (number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-  }
-
-  console.log(total)
+  getNumberWithCommas(total)
 
   if (!total || total === 0) {
     return (

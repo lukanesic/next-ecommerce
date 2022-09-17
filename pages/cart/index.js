@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import Image from 'next/image'
+
 import Content from '../../components/Cart/Content'
 import Total from '../../components/Cart/Total'
 import MainLayout from './../../layout/MainLayout'
@@ -22,7 +24,23 @@ const Cart = () => {
       <h1 className='cart-h'>Cart</h1>
       {cart.map((item, index) => (
         <div className='cart' key={item.id}>
-          <img src={item.image} alt={item.name} />
+          <div
+            className='image-placeholder'
+            style={{
+              width: '300px',
+              height: '300px',
+              marginRight: '2rem',
+              position: 'relative',
+            }}
+          >
+            <Image
+              src={item.image}
+              alt={item.name}
+              layout='fill'
+              objectFit='center'
+            />
+          </div>
+
           <Content
             item={item}
             cartTotalAmonut={cartTotalAmonut}
