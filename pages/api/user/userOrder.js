@@ -7,15 +7,22 @@ const handler = async (req, res) => {
     const client = await connectDatabase()
     const db = client.db('ecomm')
     const userCollection = db.collection('user')
-    const findUser = await userCollection.findOne({ email: email })
 
-    console.log(req.body)
+    const order = req.body.order
+    const email = req.body.order.email
 
-    // const result = await ordersCollection.insertOne({ customer, order })
+    const update = await userCollection.updateOne(
+      { email: email },
+      { $set: { orderHistory: { order } } }
+    )
 
-    // res.status(200).json({ orderId: result.insertedId })
-    // client.close()
-    // return result
+    res.status(200).json({ msg: 'Ok' })
+    client.close()
+    return update
+
+    // Svakako moram da vrsim proveru da li orderHistory postoji
+    // Ukoliko postoji ja nadodajem na vec napravljeni niz
+    // U suprotnom pravim orderHistory niz sa objektima
   }
 }
 

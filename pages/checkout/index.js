@@ -9,6 +9,7 @@ import MainLayout from '../../layout/MainLayout'
 import Form from '../../components/Form'
 import Summary from '../../components/Checkout/Summary'
 import Link from 'next/link'
+import { ObjectId } from 'bson'
 
 const createOrder = async (order) => {
   const req = await fetch('/api/products/order', {
@@ -77,6 +78,7 @@ const Checkout = () => {
         const userOrderObj = {
           bag: [...cart],
           orderId: req.orderId,
+          email: session.user.email,
         }
         const userReq = await addUserOrder(userOrderObj)
 
