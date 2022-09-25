@@ -1,13 +1,11 @@
-import { connectDatabase } from '../../../lib/db'
+import { connectToDbMong } from '../../../lib/db'
+import Product from './../../../models/productModel'
 
 const handler = async (req, res) => {
   if (req.method === 'GET') {
-    const client = await connectDatabase()
-    const db = client.db('ecomm')
-    const data = await db.collection('products').find({}).toArray()
-
-    res.json(data)
-    client.close()
+    await connectToDbMong()
+    const data = await Product.find({})
+    res.status(200).json(data)
   }
 }
 

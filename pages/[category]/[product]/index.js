@@ -33,7 +33,7 @@ const Product = ({ data, path }) => {
           {/* Dynamic */}
           {/* <h1>{collectionName}</h1> */}
           <h1>{product.name}</h1>
-          <h4>{product.collection.toUpperCase()}</h4>
+          <h4>{product.category.toUpperCase()}</h4>
         </div>
         <div className='product-container'>
           {/* Placeholder dok ne dobijem pravu sliku */}
@@ -63,9 +63,9 @@ const Product = ({ data, path }) => {
                 handleAddToCart({
                   name: product.name,
                   price: product.price,
-                  description1: product.about,
-                  description2: product.description,
-                  id: product._id,
+                  about: product.about,
+                  description: product.description,
+                  _id: product._id,
                   image: product.image,
                 })
               }
@@ -79,7 +79,7 @@ const Product = ({ data, path }) => {
       <AddToCartSide
         name={product.name}
         price={product.price}
-        collection={product.collection}
+        category={product.category}
         show={showSideCart}
         setShow={setShowSideCart}
         image={product.image}
@@ -101,7 +101,7 @@ export async function getStaticPaths() {
   const data = await getCollectionPath()
   const paths = await data.map((product) => {
     return {
-      params: { collection: product.collection, product: product.href },
+      params: { category: product.category, product: product.href },
     }
   })
   return {

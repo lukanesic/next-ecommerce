@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import MainLayout from './../../layout/MainLayout'
+import MainLayout from '../../layout/MainLayout'
 import { AnimatePresence, motion } from 'framer-motion'
-import Box from './../../components/Box'
+import Box from '../../components/Box'
 
-const Collection = ({ data, path }) => {
+const Category = ({ data, path }) => {
   return (
     <MainLayout>
       <motion.div
@@ -37,16 +37,16 @@ const Collection = ({ data, path }) => {
 }
 
 export async function getStaticPaths() {
-  const getCollectionPath = async () => {
+  const getCategoryPath = async () => {
     const request = await fetch(`http://localhost:3000/api/products/all`)
     const response = await request.json()
     return response
   }
 
-  const data = await getCollectionPath()
+  const data = await getCategoryPath()
   const paths = await data.map((product) => {
     return {
-      params: { collection: product.collection },
+      params: { category: product.category },
     }
   })
   return {
@@ -57,23 +57,23 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async (context) => {
   const { params } = context
-  const getCollection = async () => {
+  const getCategory = async () => {
     const request = await fetch(
-      `http://localhost:3000/api/products/collection?params=${params.collection}`,
+      `http://localhost:3000/api/products/category?params=${params.category}`,
       params
     )
     const response = await request.json()
     return response
   }
 
-  const data = await getCollection()
+  const data = await getCategory()
 
   return {
     props: {
       data,
-      path: params.collection,
+      path: params.category,
     },
   }
 }
 
-export default Collection
+export default Category

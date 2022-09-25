@@ -13,8 +13,6 @@ const Content = ({ item, cartTotalAmount }) => {
   const dispatch = useDispatch()
   const { name, description, price, qty } = item
 
-  console.log(item)
-
   return (
     <div className='cart-content'>
       <div className='cart-c-info'>

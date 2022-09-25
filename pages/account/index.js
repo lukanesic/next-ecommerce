@@ -76,13 +76,13 @@ const Account = () => {
       <div className='account-tab'>
         <h3
           onClick={() => setAccountTab(0)}
-          className={accountTab === 0 && 'active-tab'}
+          className={accountTab === 0 ? 'active-tab' : ''}
         >
           Change Password
         </h3>
         <h3
           onClick={() => setAccountTab(1)}
-          className={accountTab === 1 && 'active-tab'}
+          className={accountTab === 1 ? 'active-tab' : ''}
         >
           Order History
         </h3>

@@ -26,27 +26,14 @@ const createOrder = async (order) => {
   return res
 }
 
-const addUserOrder = async (order) => {
-  const req = await fetch('/api/user/userOrder', {
-    method: 'POST',
-    body: JSON.stringify({
-      order,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-
-  const res = await req.json()
-  return res
-}
-
 const Checkout = () => {
   const { data: session } = useSession()
 
   const { cart, cartTotalAmonut, cartTotalQuantity } = useSelector(
     (state) => state.cart
   )
+
+  console.log(cart)
 
   const dispatch = useDispatch()
 
@@ -64,30 +51,14 @@ const Checkout = () => {
     e.preventDefault()
 
     const order = {
-      bag: [...cart],
-      customer: {
-        name: session.user.name,
-        email: session.user.email,
-        address: session.user.address,
-      },
+      user: { ...session.user },
+      cart: [...cart],
     }
 
     try {
       const req = await createOrder(order)
       if (req.msg !== 'error') {
-        const userOrderObj = {
-          bag: [...cart],
-          orderId: req.orderId,
-          email: session.user.email,
-        }
-        const userReq = await addUserOrder(userOrderObj)
-
-        if (userReq.msg !== 'error') {
-          router.replace('/')
-          dispatch(resetCart())
-        } else {
-          setError(true)
-        }
+        console.log('Order Placed')
       } else {
         setError(true)
         return

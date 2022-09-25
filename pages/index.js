@@ -6,11 +6,11 @@ import Box from './../components/Box'
 
 export default function Home({ data }) {
   const alaroCollection = data.filter(
-    (item, index) => item.collection === 'alaro'
+    (item, index) => item.category === 'alaro'
   )
 
   const rhodesCollection = data.filter(
-    (item, index) => item.collection === 'rhodes'
+    (item, index) => item.category === 'rhodes'
   )
 
   return (
@@ -35,7 +35,7 @@ export default function Home({ data }) {
             {alaroCollection.map((item) => (
               <Box
                 key={item._id}
-                link={`${item.collection}/${item.href}`}
+                link={`${item.category}/${item.href}`}
                 price={item.price}
                 name={item.name}
                 image={item.image}
@@ -56,7 +56,7 @@ export default function Home({ data }) {
             {rhodesCollection.map((item) => (
               <Box
                 key={item._id}
-                link={`${item.collection}/${item.href}`}
+                link={`${item.category}/${item.href}`}
                 price={item.price}
                 name={item.name}
                 image={item.image}

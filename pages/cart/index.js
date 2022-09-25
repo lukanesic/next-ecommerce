@@ -23,7 +23,7 @@ const Cart = () => {
     <MainLayout>
       <h1 className='cart-h'>Cart</h1>
       {cart.map((item, index) => (
-        <div className='cart' key={item.id}>
+        <div className='cart' key={item._id}>
           <div
             className='image-placeholder'
             style={{

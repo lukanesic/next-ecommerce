@@ -17,11 +17,11 @@ export const orderSchema = mongoose.Schema(
           type: Number,
           required: true,
         },
-        description1: {
+        about: {
           type: String,
           required: true,
         },
-        description2: {
+        description: {
           type: String,
           required: true,
         },
@@ -33,7 +33,7 @@ export const orderSchema = mongoose.Schema(
           type: String,
           required: true,
         },
-        product: {
+        _id: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
           ref: 'Product',
@@ -44,4 +44,5 @@ export const orderSchema = mongoose.Schema(
   { timestamp: true }
 )
 
-export const Order = mongoose.model('Order', orderSchema)
+export const Order =
+  mongoose.models.Order || mongoose.model('Order', orderSchema)

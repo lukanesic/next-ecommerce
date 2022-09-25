@@ -1,21 +1,22 @@
-import { connectDatabase } from '../../../lib/db'
+import { connectToDbMong } from '../../../lib/db'
+import { Order } from '../../../models/orderModel'
 
 const handler = async (req, res) => {
   if (req.method !== 'POST') {
     res.status(404).json({ msg: 'error' })
   } else {
-    const client = await connectDatabase()
-    const db = client.db('ecomm')
-    const ordersCollection = db.collection('orders')
+    const customerId = req.body.order.user.id
+    const order = req.body.order.cart
 
-    const customer = req.body.order.customer
-    const order = req.body.order.bag
     console.log(order)
+    await connectToDbMong()
 
-    const result = await ordersCollection.insertOne({ customer, order })
+    const result = await Order.create({
+      customer: customerId,
+      orderItems: order,
+    })
 
-    res.status(200).json({ orderId: result.insertedId })
-    client.close()
+    res.status(201).json({ msg: 'Order Created' })
     return result
   }
 }
