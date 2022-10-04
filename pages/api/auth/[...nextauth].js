@@ -7,6 +7,7 @@ import User from '../../../models/userModel'
 export default NextAuth({
   session: {
     jwt: true,
+    secret: process.env.SECRET,
   },
   callbacks: {
     async jwt({ token, user }) {
