@@ -64,6 +64,14 @@ export default function Home({ data }) {
               />
             ))}
           </div>
+
+          <div className='home-intro-section'>
+            <h5>Introducing</h5>
+            <Link href='/marbella'>
+              <h1>Marbella</h1>
+            </Link>
+            <h5>The 2022 Collection</h5>
+          </div>
         </div>
       </MainLayout>
     </div>

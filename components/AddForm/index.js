@@ -1,31 +1,29 @@
 import React, { useRef, useState } from 'react'
+import { useSession } from 'next-auth/react'
 
 const AddForm = () => {
   const [feedback, setFeedback] = useState(false)
 
   const title = useRef()
   const category = useRef()
-  const subcategory = useRef()
-  const url = useRef()
+  const href = useRef()
   const image = useRef()
   const description = useRef()
   const about = useRef()
   const keyWords = useRef()
-  const spec1 = useRef()
-  const spec2 = useRef()
-  const spec3 = useRef()
-  const spec4 = useRef()
-  const spec5 = useRef()
+  const price = useRef()
+
+  const { data: session, status } = useSession()
 
   const resetForm = () => {
     title.current.value = ''
     category.current.value = ''
-    subcategory.current.value = ''
-    url.current.value = ''
+    href.current.value = ''
     image.current.value = ''
     description.current.value = ''
     about.current.value = ''
     keyWords.current.value = ''
+    price.current.value = ''
 
     setTimeout(() => {
       setFeedback(false)
@@ -38,10 +36,11 @@ const AddForm = () => {
     const searchKey = keyWords.current.value.replace(/,/g, ' ')
 
     const product = {
+      user: session.user.id,
       title: title.current.value,
       category: category.current.value,
-      subcategory: subcategory.current.value,
-      url: url.current.value,
+      href: href.current.value,
+      price: price.current.value,
       image: image.current.value,
       description: description.current.value,
       about: about.current.value,
@@ -80,7 +79,10 @@ const AddForm = () => {
       <input type='text' required className='inputLabel' ref={category} />
 
       <label>Link</label>
-      <input type='text' required className='inputLabel' ref={url} />
+      <input type='text' required className='inputLabel' ref={href} />
+
+      <label>Price</label>
+      <input type='text' required className='inputLabel' ref={price} />
 
       <label>Image</label>
       <input type='text' required className='inputLabel' ref={image} />
