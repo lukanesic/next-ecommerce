@@ -69,17 +69,16 @@ const Register = () => {
 
     try {
       const request = await createUser(credentials)
-      console.log(request)
 
       if (request.message === 'User already exist') {
-        setError(request.message)
+        throw new Error('User already exist')
         return
       }
 
       resetForm()
       router.replace('/login')
     } catch (error) {
-      console.log(error)
+      setError(error.message)
       return
     }
   }
@@ -112,6 +111,7 @@ const Register = () => {
             className='inputLabel'
           />
         </div>
+        {error === 'User already exist' && <li>{error}</li>}
 
         <div className='formdiv'>
           <label htmlFor='email'>Address</label>

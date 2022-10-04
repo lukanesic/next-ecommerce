@@ -7,7 +7,7 @@ import User from '../../../models/userModel'
 export default NextAuth({
   session: {
     jwt: true,
-    secret: process.env.SECRET,
+    // secret: process.env.SECRET,
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -35,7 +35,7 @@ export default NextAuth({
         const user = await User.findOne({ email: email })
 
         if (!user) {
-          throw new Error('Email not found')
+          throw new Error('Email not found!')
           return
         }
 

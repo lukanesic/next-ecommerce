@@ -9,6 +9,8 @@ import Link from 'next/link'
 
 const Login = ({ path }) => {
   const [error, setError] = useState()
+  const [passwordError, setPasswordError] = useState()
+  const [emailError, setEmailError] = useState()
 
   const enteredEmail = useRef()
   const enteredPassword = useRef()
@@ -24,6 +26,8 @@ const Login = ({ path }) => {
     setError()
   }
 
+  console.log(error)
+
   const handleLogin = async (e) => {
     e.preventDefault()
 
@@ -31,7 +35,10 @@ const Login = ({ path }) => {
     const password = enteredPassword.current.value
 
     if (password.length < 6) {
-      setError('Password must contain more than 6 characters!')
+      setPasswordError('Password must contain more than 6 characters!')
+      setTimeout(() => {
+        setPasswordError()
+      }, [3000])
       return
     }
 
@@ -42,29 +49,30 @@ const Login = ({ path }) => {
         password,
       })
 
-      if (result.error) {
-        setError(result.error)
-        return
+      if (!result.ok) {
+        throw new Error(result.error)
+      } else {
+        resetForm()
+        router.replace(`${prevPath ? 'checkout' : '/'}`)
       }
-
-      resetForm()
-      router.replace(`${prevPath ? 'checkout' : '/'}`)
-
-      console.log(result)
     } catch (error) {
-      console.log(error)
-      setError()
+      if (error.message === 'Email not found!') {
+        setEmailError(error.message)
+        setTimeout(() => {
+          setEmailError()
+        }, [3000])
+      } else if (error.message === 'Incorect password') {
+        setPasswordError(error.message)
+        setTimeout(() => {
+          setPasswordError()
+        }, [3000])
+      } else if (error.message === 'CredentialsSignin') {
+        setPasswordError('Something went wrong! Try later.')
+        setTimeout(() => {
+          setPasswordError()
+        }, [3000])
+      }
     }
-
-    // if (result.error === 'EmailError') {
-    //   setEmailError('Email not found')
-    //   return
-    // } else if (result.error === 'PasswordError') {
-    //   setPassError('Invalid password')
-    //   return
-    // } else if (result.error === null) {
-    //   router.replace('/')
-    // }
   }
   return (
     <MainLayout>
@@ -81,6 +89,7 @@ const Login = ({ path }) => {
             className='inputLabel'
           />
         </div>
+        {emailError && <li style={{ color: 'red' }}>{emailError}</li>}
 
         <div className='formdiv'>
           <label htmlFor='password'>Password</label>
@@ -94,6 +103,7 @@ const Login = ({ path }) => {
             className='inputLabel'
           />
         </div>
+        {passwordError && <li style={{ color: 'red' }}>{passwordError}</li>}
 
         <button>Login</button>
 
