@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth/next'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { comaprePasswords } from './../../../lib/passwords'
-import { connectDatabase, connectToDbMong } from '../../../lib/db'
+import { connectToDbMong } from '../../../lib/db'
 import User from '../../../models/userModel'
 
 export default NextAuth({
@@ -31,7 +31,7 @@ export default NextAuth({
       async authorize(credentials, req) {
         const { email, password } = credentials
 
-        await connectDatabase()
+        await connectToDbMong()
         const user = await User.findOne({ email: email })
 
         if (!user) {
