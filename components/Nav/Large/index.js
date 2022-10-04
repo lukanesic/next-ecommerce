@@ -16,6 +16,8 @@ const Large = ({ cls, open, setOpen, openSearch, setOpenSearch }) => {
     await signOut({ redirect: false })
   }
 
+  console.log(session)
+
   return (
     <nav className={`lg-nav ${cls}`}>
       <div className='logo'>

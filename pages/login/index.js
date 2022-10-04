@@ -53,6 +53,7 @@ const Login = ({ path }) => {
       console.log(result)
     } catch (error) {
       console.log(error)
+      setError()
     }
 
     // if (result.error === 'EmailError') {
@@ -107,7 +108,7 @@ const Login = ({ path }) => {
 
 export const getServerSideProps = async (context) => {
   const session = await getSession({ req: context.req })
-  const path = context.req.headers.referer
+  const path = context.resolvedUrl
 
   if (session) {
     return {
