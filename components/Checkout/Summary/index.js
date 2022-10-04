@@ -2,7 +2,7 @@ import React from 'react'
 
 import { getNumberWithCommas } from '../../../lib/calc'
 
-const Summary = ({ onSubmit, cart, cartTotalAmonut, cartTotalQuantity }) => {
+const Summary = ({ feedback, cart, cartTotalAmonut, cartTotalQuantity }) => {
   return (
     <div className='summary'>
       <h1 className='cart-h'>Summary</h1>
@@ -20,7 +20,8 @@ const Summary = ({ onSubmit, cart, cartTotalAmonut, cartTotalQuantity }) => {
 
       {/* Za sad je Order, ka napravim payment sistem, onda ide kroz to */}
       {/* <button type='submit'>Proceed to payment</button> */}
-      <button type='submit'>Make your order</button>
+      {!feedback && <button type='submit'>Make your order</button>}
+      {feedback && <button>Ordered successfuly!</button>}
     </div>
   )
 }

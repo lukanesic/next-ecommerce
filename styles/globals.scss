@@ -9,6 +9,23 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  cursor: default;
+}
+
 // HOME PAGE
 .home {
   .home-bg {
@@ -100,10 +117,12 @@
 @import './../components/Menus/TopCart/topcart';
 @import './../components/Form/form';
 @import './../components/Checkout/Summary/summary';
-@import './../components/Account/OrderHistory/orderhistory';
+@import './../components/OrderHistory/orderhistory';
 
-@import './../pages/[collection]/collection';
-@import './../pages/[collection]/[product]/product';
+@import './../components/AddForm/addform';
+
+@import './../pages/[category]/collection';
+@import './../pages/[category]/[product]/product';
 @import './../pages/cart/cart';
 @import './../pages/account/account';
 @import './../pages/search/search';

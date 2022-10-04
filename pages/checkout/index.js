@@ -33,6 +33,8 @@ const Checkout = () => {
     (state) => state.cart
   )
 
+  const [feedback, setFeedback] = useState(false)
+
   console.log(cart)
 
   const dispatch = useDispatch()
@@ -59,6 +61,13 @@ const Checkout = () => {
       const req = await createOrder(order)
       if (req.msg !== 'error') {
         console.log('Order Placed')
+        setFeedback(true)
+        dispatch(resetCart())
+
+        setTimeout(() => {
+          setFeedback(false)
+          router.replace('/')
+        }, [10000])
       } else {
         setError(true)
         return
@@ -91,6 +100,7 @@ const Checkout = () => {
               cart={cart}
               cartTotalAmonut={cartTotalAmonut}
               cartTotalQuantity={cartTotalQuantity}
+              feedback={feedback}
             />
           </>
         )}

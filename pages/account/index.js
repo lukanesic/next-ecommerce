@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import MainLayout from './../../layout/MainLayout'
 import { getSession, useSession } from 'next-auth/react'
 import Form from './../../components/Form'
 import { useRouter } from 'next/router'
-import OrderHistory from '../../components/Account/OrderHistory'
+import OrderHistory from './../../components/OrderHistory'
+import Image from 'next/image'
 
 const changePassword = async (passwordData) => {
   const response = await fetch('/api/user/changePass', {
@@ -23,11 +24,26 @@ const Account = () => {
   const [error, setError] = useState()
   const [success, setSuccess] = useState()
   const [accountTab, setAccountTab] = useState(0)
+  const [orders, setOrders] = useState([])
 
   const router = useRouter()
   const currPass = useRef()
   const newPass = useRef()
   const { data: session, status } = useSession()
+
+  // fetch poziv za odredjenog usera pomocu id-a.
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const request = await fetch(
+        `/api/orders/userOrder?params=${session.user.id}`
+      )
+      const response = await request.json()
+
+      setOrders(response)
+    }
+
+    fetchOrders()
+  }, [])
 
   const resetForm = () => {
     currPass.current.value = ''
@@ -84,7 +100,7 @@ const Account = () => {
           onClick={() => setAccountTab(1)}
           className={accountTab === 1 ? 'active-tab' : ''}
         >
-          Order History
+          Your Order History
         </h3>
       </div>
 
@@ -125,7 +141,14 @@ const Account = () => {
         </Form>
       )}
 
-      {accountTab === 1 && <OrderHistory />}
+      {accountTab === 1 && (
+        <div className='orders-wrapper'>
+          {orders &&
+            orders.map((order) => (
+              <OrderHistory order={order} key={order._id} account />
+            ))}
+        </div>
+      )}
     </MainLayout>
   )
 }

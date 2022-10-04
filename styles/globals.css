@@ -7,6 +7,23 @@
           box-sizing: border-box;
 }
 
+html,
+body {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  cursor: default;
+}
+
 .home .home-bg {
   background-color: #282828;
   height: 90vh;
@@ -1595,10 +1612,127 @@
   margin: 0 auto;
 }
 
-.order-history {
-  max-width: 400px;
-  border: 1px solid red;
-  margin: 0 auto;
+.orders-wrapper {
+  width: 600px;
+  margin: 1rem auto;
+}
+
+.orders-wrapper .order {
+  border-top: 1px solid #cecece;
+  padding: 1rem 0;
+  margin: 1rem 0;
+}
+
+.orders-wrapper .order h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 200;
+  margin: 1rem 0;
+}
+
+.orders-wrapper .order .order-items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.orders-wrapper .order .order-items .order-description h5 {
+  font-size: 1.5rem;
+}
+
+.add-product-form {
+  margin: 3rem auto;
+  width: 600px;
+}
+
+.add-product-form label {
+  font-size: 1rem;
+  margin: 1rem 0;
+}
+
+.add-product-form input {
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid #cecece;
+  background: #fafafa;
+  -webkit-transition: 0.4s ease all;
+  transition: 0.4s ease all;
+  outline: none;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.add-product-form input:focus {
+  border: 1px solid #282828;
+}
+
+.add-product-form input::-webkit-input-placeholder {
+  color: #282828;
+}
+
+.add-product-form input:-ms-input-placeholder {
+  color: #282828;
+}
+
+.add-product-form input::-ms-input-placeholder {
+  color: #282828;
+}
+
+.add-product-form input::placeholder {
+  color: #282828;
+}
+
+.add-product-form .inputLabelError {
+  border: 1px solid #d80000;
+}
+
+.add-product-form .inputLabelError:focus {
+  border: 1px solid #ff0000;
+}
+
+.add-product-form button {
+  color: #282828;
+  border: 0.5px solid #282828;
+  padding: 0.7rem 2rem;
+  margin-top: 1rem;
+  display: inline-block;
+  font-size: 0.9rem;
+  -webkit-transition: all linear 0.4s;
+  transition: all linear 0.4s;
+  cursor: pointer;
+  background: transparent;
+}
+
+.add-product-form button:hover {
+  color: #fff;
+  background: #282828;
+}
+
+.add-product-form .green {
+  color: #fff;
+  background: #1bb600;
+  border: 1px solid transparent;
+}
+
+.add-product-form .green:hover {
+  color: #fff;
+  background: #1bb600;
+  border: 1px solid transparent;
+}
+
+.add-product-form .specs {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (auto)[2];
+      grid-template-columns: repeat(2, auto);
+  grid-gap: 1rem;
+  margin-top: 2rem;
 }
 
 .collection .collection-heading {

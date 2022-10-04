@@ -14,7 +14,7 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, { payload }) => {
-      const itemId = state.cart.findIndex((item) => item.id === payload.id)
+      const itemId = state.cart.findIndex((item) => item._id === payload._id)
 
       if (itemId >= 0) {
         state.cart[itemId].qty += 1
@@ -28,7 +28,7 @@ export const cartSlice = createSlice({
       }
     },
     removeFromCart: (state, { payload }) => {
-      const newCart = state.cart.filter((item) => item.id !== payload.id)
+      const newCart = state.cart.filter((item) => item._id !== payload._id)
       state.cart = newCart
 
       if (typeof window !== undefined) {
@@ -36,12 +36,12 @@ export const cartSlice = createSlice({
       }
     },
     decreaseQty: (state, { payload }) => {
-      const itemId = state.cart.findIndex((item) => item.id === payload.id)
+      const itemId = state.cart.findIndex((item) => item._id === payload._id)
 
       if (state.cart[itemId].qty > 1) {
         state.cart[itemId].qty -= 1
       } else if (state.cart[itemId].qty === 1) {
-        const newCart = state.cart.filter((item) => item.id !== payload.id)
+        const newCart = state.cart.filter((item) => item._id !== payload._id)
 
         state.cart = newCart
       }

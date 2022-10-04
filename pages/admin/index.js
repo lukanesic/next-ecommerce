@@ -5,12 +5,14 @@ import { useRouter } from 'next/router'
 
 import MainLayout from '../../layout/MainLayout'
 import Form from '../../components/Form'
-import OrderHistory from '../../components/Account/OrderHistory'
+import OrderHistory from '../../components/OrderHistory'
+import AddForm from '../../components/AddForm'
 
 const Admin = () => {
   const [error, setError] = useState()
   const [success, setSuccess] = useState()
   const [accountTab, setAccountTab] = useState(0)
+  const [orders, setOrders] = useState()
   const { data: session, status } = useSession()
   const router = useRouter()
 
@@ -24,6 +26,16 @@ const Admin = () => {
     }
   }, [session])
 
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const request = await fetch('/api/orders/all')
+      const response = await request.json()
+      setOrders(response)
+    }
+
+    fetchOrders()
+  }, [])
+
   return (
     <MainLayout>
       <div className='profileH'>
@@ -34,13 +46,13 @@ const Admin = () => {
       <div className='account-tab'>
         <h3
           onClick={() => setAccountTab(0)}
-          className={accountTab === 0 && 'active-tab'}
+          className={accountTab === 0 ? 'active-tab' : ''}
         >
           Add Product
         </h3>
         <h3
           onClick={() => setAccountTab(1)}
-          className={accountTab === 1 && 'active-tab'}
+          className={accountTab === 1 ? 'active-tab' : ''}
         >
           Order History
         </h3>
@@ -48,12 +60,19 @@ const Admin = () => {
 
       {/* Forma koja ce da se odnosi na dodavanje proizvoda */}
       {/* Zapamti da se doavanje slika na monbodb odigrava drugacije tako da to je sledece sto moras da uradis */}
-      {accountTab === 0 && <div>Add Product </div>}
+      {accountTab === 0 && <AddForm />}
 
       {/* OrderHistory ali svih mogucih porudzbina. Pored products i users, mora da postoji i orderHistory na bazi */}
       {/* Kad customer napravi porudzbinu, ta porudzbina mora da ide na dva mesta. U njegov licni objekat, i u db orderHistory */}
       {/* To ce da bude evidencija za admina */}
-      {accountTab === 1 && <OrderHistory />}
+      {accountTab === 1 && (
+        <div className='orders-wrapper'>
+          {orders &&
+            orders.map((order) => (
+              <OrderHistory order={order} key={order._id} admin />
+            ))}
+        </div>
+      )}
     </MainLayout>
   )
 }

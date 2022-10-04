@@ -9,7 +9,7 @@ const AddToCartSide = ({
   name,
   price,
   image,
-  collection,
+  category,
   description1,
 }) => {
   useEffect(() => {
@@ -56,7 +56,7 @@ const AddToCartSide = ({
                 <div className='add-cart-p-i-c'>
                   <h2>{name}</h2>
                   <h2>${price}</h2>
-                  <h3>Collection : {collection}</h3>
+                  <h3>Collection : {category}</h3>
                 </div>
               </div>
               <div className='add-cart-container'>

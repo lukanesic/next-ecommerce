@@ -7,8 +7,6 @@ const handler = async (req, res) => {
   } else {
     const customerId = req.body.order.user.id
     const order = req.body.order.cart
-
-    console.log(order)
     await connectToDbMong()
 
     const result = await Order.create({
