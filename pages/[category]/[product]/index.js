@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux'
 import { addToCart } from '../../../redux/slices/cartSlice'
 
 import AddToCartSide from '../../../components/Menus/AddToCartSide'
+import { fetchAll, fetchProduct } from '../../../lib/data'
 
 const Product = ({ data, path }) => {
   const dispatch = useDispatch()
@@ -92,16 +93,15 @@ const Product = ({ data, path }) => {
 export default Product
 
 export async function getStaticPaths() {
-  const getCollectionPath = async () => {
-    const request = await fetch(`http://localhost:3000/api/products/all`)
-    const response = await request.json()
-    return response
-  }
+  const response = await fetchAll()
+  const data = JSON.parse(JSON.stringify(response))
 
-  const data = await getCollectionPath()
   const paths = await data.map((product) => {
     return {
-      params: { category: product.category, product: product.href },
+      params: {
+        category: product.category,
+        product: product.href,
+      },
     }
   })
   return {
@@ -112,16 +112,9 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async (context) => {
   const { params } = context
-  const getCollection = async () => {
-    const request = await fetch(
-      `http://localhost:3000/api/products/product?params=${params.product}`,
-      params
-    )
-    const response = await request.json()
-    return response
-  }
 
-  const data = await getCollection()
+  const response = await fetchProduct(params.product)
+  const data = JSON.parse(JSON.stringify(response))
 
   return {
     props: {

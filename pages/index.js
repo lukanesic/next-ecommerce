@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import MainLayout from '../layout/MainLayout'
+import { fetchFeatured } from '../lib/data'
 
 import Box from './../components/Box'
 
@@ -79,17 +80,11 @@ export default function Home({ data }) {
 }
 
 export const getStaticProps = async () => {
-  const getFeatured = async () => {
-    const request = await fetch('http://localhost:3000/api/products/featured')
-    const response = await request.json()
-    return response
-  }
-
-  const data = await getFeatured()
-
+  const response = await fetchFeatured()
+  const data = JSON.parse(JSON.stringify(response))
   return {
     props: {
-      data: data,
+      data,
     },
   }
 }

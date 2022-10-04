@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import MainLayout from '../../layout/MainLayout'
 import { AnimatePresence, motion } from 'framer-motion'
 import Box from '../../components/Box'
+import { fetchAll, fetchCategory } from '../../lib/data'
 
 const Category = ({ data, path }) => {
   return (
@@ -37,13 +38,9 @@ const Category = ({ data, path }) => {
 }
 
 export async function getStaticPaths() {
-  const getCategoryPath = async () => {
-    const request = await fetch(`http://localhost:3000/api/products/all`)
-    const response = await request.json()
-    return response
-  }
+  const response = await fetchAll()
+  const data = JSON.parse(JSON.stringify(response))
 
-  const data = await getCategoryPath()
   const paths = await data.map((product) => {
     return {
       params: { category: product.category },
@@ -57,16 +54,8 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async (context) => {
   const { params } = context
-  const getCategory = async () => {
-    const request = await fetch(
-      `http://localhost:3000/api/products/category?params=${params.category}`,
-      params
-    )
-    const response = await request.json()
-    return response
-  }
-
-  const data = await getCategory()
+  const response = await fetchCategory(params.category)
+  const data = JSON.parse(JSON.stringify(response))
 
   return {
     props: {
